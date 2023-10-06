@@ -1,6 +1,7 @@
 import heapq
 from heapq import heappop, heappush
 from collections import Counter
+import pickle
 
 
 class Node:
@@ -46,7 +47,7 @@ def build_huffman_tree(text):
     if len(text) == 0:
         return
 
-    freq = Counter(text)
+    freq = Counter(text) 
 
     pq = [Node(k, v) for k, v in freq.items()]
     heapq.heapify(pq)
@@ -78,8 +79,11 @@ def build_huffman_tree(text):
             index = decode(root, index, s, ans)
     result = ''.join(ans)
     print('The decoded string is:', result)
+    return root, s
 
 
 if __name__ == '__main__':
-    text = 'The quick brown fox jumps over the lazy dog'
-    build_huffman_tree(text)
+    text = '123112'
+    tree, result = build_huffman_tree(text)
+    with open('tree.txt', 'wb') as file:
+        pickle.dump(tree, file)
