@@ -5,3 +5,4 @@ class ArchiveData:
         self.file_name = file_name
         self.data = data
         self.tree = tree
+        
