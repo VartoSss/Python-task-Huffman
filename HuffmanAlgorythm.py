@@ -1,18 +1,6 @@
 import heapq
 from heapq import heappop, heappush
 from collections import Counter
-import pickle
-
-
-class Node:
-    def __init__(self, ch, freq, left=None, right=None):
-        self.ch = ch
-        self.freq = freq
-        self.left = left
-        self.right = right
-
-    def __lt__(self, other):
-        return self.freq < other.freq
 
 class HuffmanAlgorythm:
     def is_leaf(root):
@@ -73,3 +61,15 @@ class HuffmanAlgorythm:
                 index = HuffmanAlgorythm.decode(root, index, s, ans)
         result = ''.join(ans)
         return root, s
+
+
+
+class Node:
+    def __init__(self, ch, freq, left=None, right=None):
+        self.ch = ch
+        self.freq = freq
+        self.left = left
+        self.right = right
+
+    def __lt__(self, other):
+        return self.freq < other.freq
