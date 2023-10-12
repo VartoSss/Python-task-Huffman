@@ -30,9 +30,15 @@ class Archivator:
         return bytes(bytes_list)
 
     def make_archive(path_to_old, path_to_folder_of_new, name):
+        if os.path.exists(path_to_old) and os.path.exists(path_to_folder_of_new):
+            os.mkdir(f"{path_to_folder_of_new}\\{name}.hfmn")
+            archive_data = Archivator.get_archive_data(path_to_old)
+            with open(f"{path_to_folder_of_new}\\{name}\\data.bin", "wb") as file:
+                data = archive_data.data
+                pickle.dump(data, file)
 
-        with open(f"{path_to_folder_of_new}\\{name}.bin", "wb") as file:
-            data = Archivator.get_archive_data(path_to_old).data
-            pickle.dump(data, file)
+            with open(f"{path_to_folder_of_new}\\{name}\\data_to_unarchive.txt", "wb") as file:
+                to_pickle = [archive_data.file_name, archive_data.tree]
+                pickle.dump(to_pickle, file)
 
             #pickle.dump(Archivator.get_archive_data(path_to_old), file)
