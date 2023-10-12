@@ -50,16 +50,6 @@ class HuffmanAlgorythm:
         huffmanCode = {}
         HuffmanAlgorythm.encode(root, '', huffmanCode)
         s = ''.join([huffmanCode.get(i) for i in text])
-        ans = []
-        if HuffmanAlgorythm.is_leaf(root):
-            while root.freq > 0:
-                ans.append(root.ch)
-                root.freq = root.freq - 1
-        else:
-            index = -1
-            while index < len(s) - 1:
-                index = HuffmanAlgorythm.decode(root, index, s, ans)
-        result = ''.join(ans)
         return root, s
 
 
