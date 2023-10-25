@@ -40,7 +40,7 @@ class Archivator:
             archive_data = Archivator.get_archive_data(path_to_old)
             with open(f"{path_to_folder_of_new}\\data.bin", "wb") as file:
                 data = archive_data.data
-                pickle.dump(data, file)
+                file.write(data)
 
             with open(f"{path_to_folder_of_new}\\data_to_unarchive.txt", "wb") as file:
                 to_pickle = [archive_data.file_name, archive_data.tree, archive_data.counter_added_zeros]
@@ -56,7 +56,8 @@ class Archivator:
         name = name_tree[0]
         tree = name_tree[1]
         counter_added_zeros = name_tree[2]
-        binary_string = binary_string[:-counter_added_zeros + 1]
+        if (counter_added_zeros != 0):
+            binary_string = binary_string[:-counter_added_zeros]
         result = Archivator.decode(tree, binary_string)
         with open(f"{path_to_save}\\{name}", "w") as result_file:
             result_file.write(result)
